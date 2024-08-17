@@ -32,6 +32,7 @@
 		"@tiptap/react": "^2.5.3",
 		"@tiptap/starter-kit": "^2.5.3",
 		"arctic": "^1.9.2",
+		"argon2": "^0.40.3",
 		"axios": "^1.7.3",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
