@@ -1,0 +1,52 @@
+{
+	"auth": {
+		"card": {
+			"sign_in": {
+				"title": "Sign in",
+				"sub_title": "Enter your information to sign in",
+				"email": "Email",
+				"password": "password",
+				"footer": "Don't have an account?"
+			},
+			"sign_up": {
+				"title": "Sign in",
+				"sub_title": "Enter your information to create an account",
+				"email": "Email",
+				"username": "Username",
+				"password": "Password",
+				"footer": "Already? have an account?"
+			}
+		},
+		"buttons": {
+			"sign_in": "Sign in",
+			"sign_up": "Create an account",
+			"sign_out": "Sign out",
+			"google": "Continue with Google"
+		},
+		"validations": {
+			"required": "Required",
+			"email": {
+				"email": "Invalid email address",
+				"regex": "Use the \"Continue with google\" button"
+			},
+			"username": {
+				"max": "Cannot be more than 16 characters"
+			},
+			"password": {
+				"min": "At least 8 characters"
+			}
+		},
+		"notifications": {}
+	},
+	"dropdown": {
+		"theme_changer": {
+			"title": "Theme",
+			"light": "Light",
+			"dark": "Dark",
+			"system": "System"
+		},
+		"locale_changer": {
+			"title": "Language"
+		}
+	}
+}
