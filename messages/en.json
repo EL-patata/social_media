@@ -15,7 +15,8 @@
 				"username": "Username",
 				"password": "Password",
 				"footer": "Already? have an account?"
-			}
+			},
+			"or": "Or"
 		},
 		"buttons": {
 			"sign_in": "Sign in",

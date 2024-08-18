@@ -17,7 +17,7 @@ export default function OAuthButtons({ isLoading }: Props) {
 				className="text-sm text-muted-foreground relative w-full mb-3"
 			>
 				<div className="relative z-10 px-2 bg-background mx-auto w-fit h-fit">
-					Or
+					{t('auth.card.or')}
 				</div>
 				<span className="bg-muted-foreground  h-[1px] w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 			</div>

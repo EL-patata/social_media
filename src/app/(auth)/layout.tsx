@@ -6,5 +6,8 @@ export default async function layout({ children }: PropsWithChildren) {
 	const user = await getUser();
 
 	if (user && user?.id) return redirect('/');
-	else return <div className="flex h-screen my-auto bg-accent">{children}</div>;
+	else
+		return (
+			<div className="flex h-screen my-auto bg-background">{children}</div>
+		);
 }

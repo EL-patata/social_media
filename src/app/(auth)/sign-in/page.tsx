@@ -1,4 +1,5 @@
 'use client';
+import { signIn } from '@/actions/auth/index.actions';
 import OAuthButtons from '@/components/auth/OAuthButtons';
 import Logo from '@/components/Logo';
 import { Button } from '@/components/ui/button';
@@ -12,6 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { axios } from '@/lib/axios';
+import { signInSchema, SignInSchemaType } from '@/lib/validation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import { useTranslations } from 'next-intl';
@@ -26,18 +28,6 @@ export default function Page() {
 	const t = useTranslations();
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
-	const signInSchema = z.object({
-		email: z
-			.string()
-			.trim()
-			.min(1, t('auth.validations.required'))
-			.email(t('auth.validations.email.email'))
-			.regex(/^((?!@gmail).)*$/, t('auth.validations.email.regex')),
-		password: z.string().trim().min(8, t('auth.validations.password.min')),
-	});
-
-	type SignInSchemaType = z.infer<typeof signInSchema>;
-
 	const form = useForm<SignInSchemaType>({
 		resolver: zodResolver(signInSchema),
 	});
@@ -47,30 +37,39 @@ export default function Page() {
 	async function onSubmit(values: SignInSchemaType) {
 		setIsLoading(true);
 
-		const res = await axios
-			.post('/api/auth/sign-in', JSON.stringify(values))
-			.finally(() => setIsLoading(false));
+		// const res = await axios
+		// 	.post('/api/auth/sign-in', JSON.stringify(values))
+		// 	.finally(() => setIsLoading(false));
 
-		const data = JSON.parse(res.data) as {
-			message: string;
-			success: boolean;
-		};
+		// const data = JSON.parse(res.data) as {
+		// 	message: string;
+		// 	success: boolean;
+		// };
 
-		if (!data.success)
-			return toast.error(data.message, {
-				duration: 10000,
-				position: 'top-center',
-			});
+		// if (!data.success)
+		// 	return toast.error(data.message, {
+		// 		duration: 10000,
+		// 		position: 'top-center',
+		// 	});
 
-		if (data.success) {
-			toast.success(data.message, { position: 'top-center' });
+		// if (data.success) {
+		// 	toast.success(data.message, { position: 'top-center' });
 
-			return router.push('/');
+		// 	return router.push('/');
+		// }
+
+		const res = await signIn(values);
+
+		if (res.success) {
+			toast.success('Login successful');
+			router.push('/dashboard');
+		} else {
+			toast.error(res.error);
 		}
 	}
 
 	return (
-		<Card className="mx-auto w-full md:my-auto md:max-w-xl">
+		<Card className="mx-auto w-full md:my-auto md:max-w-xl border-none">
 			<CardHeader className="text-center">
 				<span className="self-center">
 					<Logo />
@@ -89,7 +88,7 @@ export default function Page() {
 						>
 							{t('auth.card.sign_in.email')}
 							<span className="text-destructive">
-								{form.formState.errors.email?.message}
+								{t(form.formState.errors.email?.message as any)}
 							</span>
 						</Label>
 						<Input
@@ -106,7 +105,7 @@ export default function Page() {
 						>
 							{t('auth.card.sign_in.password')}
 							<span className="text-destructive">
-								{form.formState.errors.password?.message}
+								{t(form.formState.errors.password?.message as any)}
 							</span>
 						</Label>
 						<Input

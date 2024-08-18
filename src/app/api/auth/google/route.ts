@@ -10,11 +10,11 @@ export async function GET() {
 
 		cookies().set('codeVerifier', codeVerifier, {
 			httpOnly: true,
-			// secure: process.env.NODE_ENV === 'production',
+			secure: process.env.NODE_ENV === 'production',
 		});
 		cookies().set('state', state, {
 			httpOnly: true,
-			// secure: process.env.NODE_ENV === 'production',
+			secure: process.env.NODE_ENV === 'production',
 		});
 
 		const authUrl = await googleOAuthClient.createAuthorizationURL(
